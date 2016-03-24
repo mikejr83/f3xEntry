@@ -15,5 +15,22 @@
   "devDependencies": {
     "angular-mocks": "~1.5.2",
     "angular-scenario": "~1.5.2"
+  },
+  "exportsOverride": {
+    "bootstrap": {
+      "js": "dist/js/bootstrap.js",
+      "css": "dist/css/bootstrap.css",
+      "fonts": "dist/fonts/*.*"
+    },
+    "jquery": {
+      "js": "dist/jquery.js"
+    },
+    "angular": {
+      "js": "angular.js"
+    },
+    "angular-route": {
+      "js": "angular-route.js"
+    }
   }
+
 }

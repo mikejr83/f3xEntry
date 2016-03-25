@@ -36,7 +36,25 @@
     </p>
   </div>
 
-  <div class="" ng-cloak>
-    {{lol}}
+  <div class="row" ng-cloak>
+    <div class="form-group">
+      <label>Contest Type</label>
+      <select class="form-control" ng-options="contestType as contestType.name for contestType in contestTypes" ng-model="selectedContest"></select>
+    </div>
+
+    Other contest options (Name, Dates, Pilots, etc)
+
+  </div>
+
+  <div class="row" ng-show="selectedContest.type == 'f3j'" ng-cloak>
+    <h2>F3J or Thermal Duration</h2>
+  </div>
+
+  <div class="row" ng-show="selectedContest.type == 'f3b'" ng-cloak>
+    <h2>F3B</h2>
+  </div>
+
+  <div class="row" ng-show="selectedContest.type == 'f3k'" ng-cloak>
+    <h2>F3K</h2>
   </div>
 </div>

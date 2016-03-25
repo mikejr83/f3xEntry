@@ -13,7 +13,8 @@
     "bootstrap": "~3.3.6",
     "ng-table": "~0.8.3",
     "ngstorage": "~0.3.10",
-    "angular-strap": "^2.3.7"
+    "angular-strap": "^2.3.7",
+    "bootstrap-additions": "~0.3.1"
   },
   "devDependencies": {
     "angular-mocks": "~1.5.2",
@@ -42,7 +43,13 @@
       "js": "ngStorage.min.js"
     },
     "angular-strap": {
-      "js": ["dist/angular-strap.min*", "dist/angular-strap.tpl.min*"]
+      "js": [
+        "dist/angular-strap.min*",
+        "dist/angular-strap.tpl.min*"
+      ]
+    },
+    "bootstrap-additions": {
+      "css": "dist/bootstrap-additions.min*"
     }
   }
 }

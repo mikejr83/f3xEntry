@@ -7,10 +7,10 @@
     "jquery": "~2.2.2",
     "restangular": "~1.5.2",
     "lodash": "~3.10.1",
-    "bootstrap-sass": "~3.3.6",
     "es5-shim": "~4.5.7",
     "angular-cookies": "~1.5.2",
-    "angular-sanitize": "~1.5.2"
+    "angular-sanitize": "~1.5.2",
+    "bootstrap": "~3.3.6"
   },
   "devDependencies": {
     "angular-mocks": "~1.5.2",
@@ -32,5 +32,4 @@
       "js": "angular-route.js"
     }
   }
-
 }

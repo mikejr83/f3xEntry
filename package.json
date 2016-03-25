@@ -37,6 +37,7 @@
   "author": "root",
   "license": "",
   "devDependencies": {
+    "glob": "^7.0.3",
     "grunt-angular-templates": "^1.0.3",
     "grunt-bower": "^0.21.0",
     "grunt-bower-task": "^0.4.0"

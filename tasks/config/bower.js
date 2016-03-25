@@ -25,17 +25,12 @@ module.exports = function (grunt) {
           } else if (type == 'css') {
             destPath = path.join('styles', component);
           } else if (type == 'fonts') {
-            console.log('type', type);
-            console.log('component', component);
-            console.log('source', source);
-
             if (component == 'bootstrap') {
               destPath = 'styles/fonts';
             } else {
               destPath = path.join('fonts', component);
             }
           }
-          console.log('destPath', destPath)
 
           return destPath;
         },

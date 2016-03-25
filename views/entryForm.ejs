@@ -39,7 +39,10 @@
     <div class="row" ng-cloak>
       <div class="form-group">
         <label class="control-label">Contest Type</label>
-        <select class="form-control" ng-options="contestType as contestType.name for contestType in contestTypes" ng-model="selectedContest.contestType"></select>
+        <br />
+        <button type="button" class="btn btn-default" ng-model="selectedContest.contestType" bs-options="contestType as contestType.name for contestType in contestTypes" bs-select>
+          Action <span class="caret"></span>
+        </button>
       </div>
 
       <div class="form-group">
@@ -54,11 +57,49 @@
 
       <div class="form-group" ng-class="{'has-error': entryForm.endDate.$invalid}">
         <label class="control-label">End Date</label>
-        <input type="text" class="form-control" ng-model="selectedContest.endDate"   placeholder="End Date"   name="endDate"   bs-datepicker=""></input>
-
+        <input type="text" class="form-control" ng-model="selectedContest.endDate" placeholder="End Date" name="endDate" bs-datepicker=""></input>
       </div>
 
-      Other contest options (Name, Dates, Pilots, etc)
+      <div class="panel panel-default" ng-class="{'show-pilots': $storage.showPilots}">
+        <div class="panel-heading clearfix">
+          <h3 class="panel-title pull-left">Pilots</h3>
+          <a class="pull-right glyphicon glyphicon-chevron-down" ng-click="togglePilots()"></a>
+          <a class="pull-right glyphicon glyphicon-chevron-up" ng-click="togglePilots()"></a>
+        </div>
+        <ul class="nav nav-pills">
+          <li role="presentation" ng-click="addPilot()"><a href=""><span class="glyphicon glyphicon-plus"></span>Add</a></li>
+          <li role="presentation"><a href="#">Home</a></li>
+        </ul>
+        <div class="panel-body">
+          Panel content
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Class</th>
+              <th>Freq</th>
+              <th>Team</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="pilot in selectedContest.pilots">
+              <td>{{$index + 1}}</td>
+              <td>
+                <input class="form-control" type="text" placeholder="Pilot Name" ng-model="pilot.name"></input>
+              </td>
+              <td></td>
+              <td>
+                <button type="button" class="btn btn-default" ng-model="pilot.freq" bs-options="freq for freq in pilotFreqs" bs-select>
+                  Action <span class="caret"></span>
+                </button>
+              </td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
     </div>
 

@@ -1,3 +1,48 @@
 .entry-form {
   padding-top: 6rem;
 }
+
+div.panel {
+  &.show-pilots {
+    div.panel-heading {
+      a.glyphicon-chevron-down {
+        display: block;
+      }
+      a.glyphicon-chevron-up {
+        display: none;
+      }
+    }
+    table.table {
+      display: table;
+    }
+    div.panel-body,
+    ul.nav {
+      display: block;
+    }
+  }
+  div.panel-heading {
+    a {
+      &.glyphicon {
+        &:hover {
+          text-decoration: none;
+        }
+        cursor: pointer;
+      }
+      &.glyphicon-chevron-down {
+        display: none;
+      }
+      &.glyphicon-chevron-up {
+        display: block;
+      }
+    }
+  }
+  table.table,
+  div.panel-body,
+  ul.nav {
+    display: none;
+  }
+  ul.nav {
+    margin-left: 1rem;
+    margin-top: 1rem;
+  }
+}

@@ -13,3 +13,11 @@ var app = angular.module('app', ['ngStorage', 'ngTable', 'mgcrea.ngStrap'])
       type: 'f3k'
     }
   ])
+  .constant('PILOT_CLASSES', [
+
+  ])
+  .constant('PILOT_FREQ', [
+    '2.4GHz',
+    '72MHz',
+    'Other'
+  ]);

@@ -25,56 +25,57 @@
 </nav>
 
 <div class="container entry-form" ng-controller="EntryFormController">
-
-  <!-- Main component for a primary marketing message or call to action -->
-  <div class="jumbotron" ng-show="showJumbo">
-    <h1>Entry Form</h1>
-    <p>This page will allow you to select between different F3X events. F3J/TD, F3B, and F3K are supported.</p>
-    <p>Once you select an event type you cannot change the type.</p>
-    <p>
-      <a class="btn btn-lg btn-primary" ng-click="hideJumbo()">OK!</a>
-    </p>
-  </div>
-
-  <div class="row" ng-cloak>
-    <div class="form-group">
-      <label class="control-label">Contest Type</label>
-      <select class="form-control" ng-options="contestType as contestType.name for contestType in contestTypes" ng-model="selectedContest.contestType"></select>
+  <div ng-form="entryForm" role="form">
+    <!-- Main component for a primary marketing message or call to action -->
+    <div class="jumbotron" ng-show="showJumbo">
+      <h1>Entry Form</h1>
+      <p>This page will allow you to select between different F3X events. F3J/TD, F3B, and F3K are supported.</p>
+      <p>Once you select an event type you cannot change the type.</p>
+      <p>
+        <a class="btn btn-lg btn-primary" ng-click="hideJumbo()">OK!</a>
+      </p>
     </div>
 
-    <div class="form-group">
-      <label class="control-label">Name</label>
-      <input class="form-control" type="text" ng-model="selectedContest.name"></input>
+    <div class="row" ng-cloak>
+      <div class="form-group">
+        <label class="control-label">Contest Type</label>
+        <select class="form-control" ng-options="contestType as contestType.name for contestType in contestTypes" ng-model="selectedContest.contestType"></select>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label">Name</label>
+        <input class="form-control" type="text" ng-model="selectedContest.name"></input>
+      </div>
+
+      <div class="form-group" ng-class="{'has-error': entryForm.startDate.$invalid}">
+        <label class="control-label">Start Date</label>
+        <input type="text" class="form-control" ng-model="selectedContest.startDate" placeholder="Start Date" name="startDate" bs-datepicker=""></input>
+      </div>
+
+      <div class="form-group" ng-class="{'has-error': entryForm.endDate.$invalid}">
+        <label class="control-label">End Date</label>
+        <input type="text" class="form-control" ng-model="selectedContest.endDate"   placeholder="End Date"   name="endDate"   bs-datepicker=""></input>
+
+      </div>
+
+      Other contest options (Name, Dates, Pilots, etc)
+
     </div>
 
-    <div class="form-group">
-      <label class="control-label">Start Date</label>
-      <input type="text" class="form-control" ng-model="selectedContest.startDate" placeholder="Start Date" data-autoclose="1" bs-datepicker></input>
+    <div class="row" ng-show="selectedContest.contestType.type == 'f3j'" ng-cloak>
+      <h2>F3J or Thermal Duration</h2>
     </div>
 
-    <div class="form-group">
-      <label class="control-label">End Date</label>
-      <input type="text" class="form-control" ng-model="selectedContest.endDate" name="date" placeholder="End Date" bs-datepicker></input>
-
+    <div class="row" ng-show="selectedContest.contestType.type == 'f3b'" ng-cloak>
+      <h2>F3B</h2>
     </div>
 
-    Other contest options (Name, Dates, Pilots, etc)
-
-  </div>
-
-  <div class="row" ng-show="selectedContest.contestType.type == 'f3j'" ng-cloak>
-    <h2>F3J or Thermal Duration</h2>
-  </div>
-
-  <div class="row" ng-show="selectedContest.contestType.type == 'f3b'" ng-cloak>
-    <h2>F3B</h2>
-  </div>
-
-  <div class="row" ng-show="selectedContest.contestType.type == 'f3k'" ng-cloak>
-    <h2>F3K</h2>
-  </div>
-  <div class="row">
-    {{$storage}} <br />
-    {{selectedContest}}
+    <div class="row" ng-show="selectedContest.contestType.type == 'f3k'" ng-cloak>
+      <h2>F3K</h2>
+    </div>
+    <div class="row">
+      {{$storage}}
+      <br /> {{selectedContest}}
+    </div>
   </div>
 </div>

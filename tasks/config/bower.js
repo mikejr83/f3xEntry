@@ -11,7 +11,7 @@
 
 module.exports = function (grunt) {
   var path = require('path'),
-      targetDir = '.tmp/public';
+    targetDir = '.tmp/public';
 
   grunt.config.set('bower', {
     install: {
@@ -19,12 +19,22 @@ module.exports = function (grunt) {
         targetDir: targetDir,
         layout: function (type, component, source) {
           var renamedType = type,
-              destPath = '';
-          if (type == 'js') renamedType = 'js/dependencies';
-          else if (type == 'css') renamedType = 'styles';
+            destPath = '';
+          if (type == 'js') {
+            destPath = path.join('js/dependencies', component);
+          } else if (type == 'css') {
+            destPath = path.join('styles', component);
+          } else if (type == 'fonts') {
+            console.log('type', type);
+            console.log('component', component);
+            console.log('source', source);
 
-          destPath = path.join(renamedType, component);
-
+            if (component == 'bootstrap') {
+              destPath = 'styles/fonts';
+            } else {
+              destPath = path.join('fonts', component);
+            }
+          }
           console.log('destPath', destPath)
 
           return destPath;

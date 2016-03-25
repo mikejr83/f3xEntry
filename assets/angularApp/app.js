@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ngStorage', 'ngTable'])
+var app = angular.module('app', ['ngStorage', 'ngTable', 'mgcrea.ngStrap'])
   .constant('CONTEST_TYPES', [
     {
       name: 'F3J/TD',

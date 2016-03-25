@@ -9,12 +9,13 @@
     "lodash": "~3.10.1",
     "es5-shim": "~4.5.7",
     "angular-cookies": "~1.5.2",
-    "angular-sanitize": "~1.5.2",
+    "angular-sanitize": "^1.5.2",
     "bootstrap": "~3.3.6",
     "ng-table": "~0.8.3",
     "ngstorage": "~0.3.10",
     "angular-strap": "^2.3.7",
-    "bootstrap-additions": "~0.3.1"
+    "bootstrap-additions": "~0.3.1",
+    "angular-animate": "^1.5.2"
   },
   "devDependencies": {
     "angular-mocks": "~1.5.2",
@@ -50,6 +51,15 @@
     },
     "bootstrap-additions": {
       "css": "dist/bootstrap-additions.min*"
+    },
+    "angular-animate": {
+      "js": "angular-animate.min*"
+    },
+    "angular-sanitize": {
+      "js": "angular-sanitize.min*"
+    },
+    "angular-cookies": {
+      "js": "angular-cookies.min*"
     }
   }
 }

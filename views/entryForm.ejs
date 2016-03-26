@@ -113,13 +113,17 @@
 
     </div>
 
-    <div class="row" ng-show="selectedContest.contestType.key == 'f3j'" ng-cloak>
+    <div class="row" ng-if="selectedContest.contestType.key == 'f3j'" ng-cloak>
       <h2>F3J or Thermal Duration</h2>
       <ul class="nav nav-pills">
         <li role="presentation" ng-click="addRound()"><a href=""><span class="glyphicon glyphicon-plus"></span>Add Round</a></li>
       </ul>
       <div class="round" ng-repeat="round in selectedContest.rounds">
-        <h3>Round <span ng-bind="::round.number"></span></h3> {{number}}
+        <h3>Round <span ng-bind="::round.number"></span></h3>
+        <div class="form-inline">
+          <label>Target Time</label>
+          <input class="form-control time-control" type="text" ng-model="round.targetTime" ui-options="maskUIOptions" ui-mask="?99:?5?9" ui-mask-placeholder model-view-value="true" ui-mask-placeholder-char="0"></input>
+        </div>
         <table class="table">
           <thead>
             <tr>
@@ -133,22 +137,11 @@
               <td ng-bind="pilot.name"></td>
               <td>
                 <div class="form-inline">
-                  <div class="form-group">
-                    <label>Min</label>
-                    <input class="form-control" type="text" ng-model="pilot.rounds[round.number - 1].time.minutes"></input>
-                  </div>
-                  <div class="form-group">
-                    <label>Min</label>
-                    <input class="form-control" type="text" ng-model="pilot.rounds[round.number - 1].time.seconds"></input>
-                  </div>
-                  <div class="form-group">
-                    <label>Min</label>
-                    <input class="form-control" type="text" ng-model="pilot.rounds[round.number - 1].time.fraction"></input>
-                  </div>
+                  <input class="form-control time-control" type="text" ng-model="pilot.rounds[round.number - 1].time" ui-options="maskUIOptions" ui-mask="?9?9:?5?9.?9?9" ui-mask-placeholder ui-mask-placeholder-char="0" model-view-value="true"></input>
                 </div>
               </td>
               <td>
-                <input type="text" ng-model="pilot.rounds[round.number - 1].landing"></input>
+                <input class="form-control time-control" type="text" ng-model="pilot.rounds[round.number - 1].landing" ui-options="maskUIOptions" ui-mask="?9?9?9" ui-mask-placeholder ui-mask-placeholder-char="space" model-view-value="true"></input>
               </td>
             </tr>
           </tbody>
@@ -156,11 +149,11 @@
       </div>
     </div>
 
-    <div class="row" ng-show="selectedContest.contestType.key == 'f3b'" ng-cloak>
+    <div class="row" ng-if="selectedContest.contestType.key == 'f3b'" ng-cloak>
       <h2>F3B</h2>
     </div>
 
-    <div class="row" ng-show="selectedContest.contestType.key == 'f3k'" ng-cloak>
+    <div class="row" ng-if="selectedContest.contestType.key == 'f3k'" ng-cloak>
       <h2>F3K</h2>
     </div>
     <div class="row">

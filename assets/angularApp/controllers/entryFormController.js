@@ -1,6 +1,7 @@
 angular.module('app')
   .controller('EntryFormController', ['$scope', '$log', '$localStorage', 'contestTypeFactory', 'PILOT_CLASSES', 'PILOT_FREQ', function ($scope, $log, $localStorage, contestTypeFactory, pilotClasses, pilotFreqs) {
     var contestTypes = contestTypeFactory.loadContestTypes();
+
     $scope.$storage = $localStorage.$default({
       contests: [
         {
@@ -15,6 +16,14 @@ angular.module('app')
       showPilots: true,
       classes: _.clone(pilotClasses)
     });
+
+    $scope.maskUIOptions = {
+      maskDefinitions: {
+        '9': /\d/,
+        '5': /[1-5]/,
+        '1': /1/
+      }
+    };
 
     $scope.showJumbo = true;
 

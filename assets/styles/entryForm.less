@@ -34,6 +34,7 @@ div.panel {
       &.glyphicon-chevron-up {
         display: block;
       }
+      color: inherit;
     }
   }
   table.table,
@@ -44,5 +45,26 @@ div.panel {
   ul.nav {
     margin-left: 1rem;
     margin-top: 1rem;
+    a {
+      color: inherit;
+      span {
+        margin-right: 0.5rem;
+      }
+    }
+  }
+  table.table {
+    td.action-column {
+      vertical-align: middle;
+      a {
+        &:hover {
+          text-decoration: none;
+        }
+        &.delete:hover {
+          color: red;
+        }
+
+        color: inherit;
+      }
+    }
   }
 }

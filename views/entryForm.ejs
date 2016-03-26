@@ -40,7 +40,7 @@
       <div class="form-group">
         <label class="control-label">Contest Type</label>
         <br />
-        <button type="button" class="btn btn-default" ng-model="selectedContest.contestType" bs-options="contestType as contestType.name for contestType in contestTypes" bs-select>
+        <button type="button" class="btn btn-default" placeholder="Type" ng-model="selectedContest.contestType" bs-options="contestType as contestType.name for contestType in contestTypes" bs-select>
           Action <span class="caret"></span>
         </button>
       </div>
@@ -81,21 +81,31 @@
               <th>Class</th>
               <th>Freq</th>
               <th>Team</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
             <tr ng-repeat="pilot in selectedContest.pilots">
-              <td>{{$index + 1}}</td>
+              <td class="action-column">{{$index + 1}}</td>
               <td>
                 <input class="form-control" type="text" placeholder="Pilot Name" ng-model="pilot.name"></input>
               </td>
-              <td></td>
               <td>
-                <button type="button" class="btn btn-default" ng-model="pilot.freq" bs-options="freq for freq in pilotFreqs" bs-select>
+                <button type="button" class="btn btn-default" placeholder="Class" ng-model="pilot.class" bs-options="class for class in pilotClasses" bs-select>
                   Action <span class="caret"></span>
                 </button>
               </td>
-              <td></td>
+              <td>
+                <button type="button" class="btn btn-default" placeholder="Freq" ng-model="pilot.freq" bs-options="freq for freq in pilotFreqs" bs-select>
+                  Action <span class="caret"></span>
+                </button>
+              </td>
+              <td>
+                <input type="text" class="form-control" placeholder="Team"></input>
+              </td>
+              <td class="action-column">
+                <a ng-click="removePilot(pilot)" class="delete glyphicon glyphicon-minus-sign" href="" class=""></a>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -103,20 +113,62 @@
 
     </div>
 
-    <div class="row" ng-show="selectedContest.contestType.type == 'f3j'" ng-cloak>
+    <div class="row" ng-show="selectedContest.contestType.key == 'f3j'" ng-cloak>
       <h2>F3J or Thermal Duration</h2>
+      <ul class="nav nav-pills">
+        <li role="presentation" ng-click="addRound()"><a href=""><span class="glyphicon glyphicon-plus"></span>Add Round</a></li>
+      </ul>
+      <div class="round" ng-repeat="round in selectedContest.rounds">
+        <h3>Round <span ng-bind="::round.number"></span></h3> {{number}}
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Pilot</th>
+              <th>Time</th>
+              <th>Landing</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="pilot in selectedContest.pilots">
+              <td ng-bind="pilot.name"></td>
+              <td>
+                <div class="form-inline">
+                  <div class="form-group">
+                    <label>Min</label>
+                    <input class="form-control" type="text" ng-model="pilot.rounds[round.number - 1].time.minutes"></input>
+                  </div>
+                  <div class="form-group">
+                    <label>Min</label>
+                    <input class="form-control" type="text" ng-model="pilot.rounds[round.number - 1].time.seconds"></input>
+                  </div>
+                  <div class="form-group">
+                    <label>Min</label>
+                    <input class="form-control" type="text" ng-model="pilot.rounds[round.number - 1].time.fraction"></input>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <input type="text" ng-model="pilot.rounds[round.number - 1].landing"></input>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 
-    <div class="row" ng-show="selectedContest.contestType.type == 'f3b'" ng-cloak>
+    <div class="row" ng-show="selectedContest.contestType.key == 'f3b'" ng-cloak>
       <h2>F3B</h2>
     </div>
 
-    <div class="row" ng-show="selectedContest.contestType.type == 'f3k'" ng-cloak>
+    <div class="row" ng-show="selectedContest.contestType.key == 'f3k'" ng-cloak>
       <h2>F3K</h2>
     </div>
     <div class="row">
       {{$storage}}
-      <br /> {{selectedContest}}
+    </div>
+
+    <div class="row clearfix">
+      <button class="pull-right btn btn-primary" ng-click="exportContest()">Export</button>
     </div>
   </div>
 </div>

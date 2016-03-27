@@ -4,6 +4,34 @@ angular.module('app')
       return '0,' + contest.name + ',' + contest.startDate + ',' + contest.endDate + ',' + contest.contestType.key
     }
 
+    function download(filename, text) {
+      var pom = document.createElement('a');
+      pom.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+      pom.setAttribute('download', filename);
+
+      if (document.createEvent) {
+        var event = document.createEvent('MouseEvents');
+        event.initEvent('click', true, true);
+        pom.dispatchEvent(event);
+      } else {
+        pom.click();
+      }
+    }
+
+    function downloadJSON(filename, text) {
+      var pom = document.createElement('a');
+      pom.setAttribute('href', 'data:application/javascript;charset=utf-8,' + encodeURIComponent(text));
+      pom.setAttribute('download', filename);
+
+      if (document.createEvent) {
+        var event = document.createEvent('MouseEvents');
+        event.initEvent('click', true, true);
+        pom.dispatchEvent(event);
+      } else {
+        pom.click();
+      }
+    }
+
     return {
       loadContestTypes: function () {
         return [
@@ -16,16 +44,19 @@ angular.module('app')
               $log.debug('Line One:', lineOne);
 
 
-              var targetTimes = [];
-              _.forEach(contest.rounds, function(round) {
+              var targetTimes = [],
+                lineTwo = '';
+              _.forEach(contest.rounds, function (round) {
                 $log.debug('Target for ' + round.number, round.targetTime);
 
                 targetTimes.push(moment.duration('00:' + round.targetTime));
+                lineTwo += round.targetTime + ',';
               });
 
-              $log.debug('Target times', targetTimes);
+              lineTwo = lineTwo.substring(0, lineTwo.length - 1);
+              $log.debug('Line Two:', lineTwo);
 
-
+              var pilots = [];
               _.forEach(contest.pilots, function (pilot) {
 
                 var rounds = [];
@@ -56,8 +87,13 @@ angular.module('app')
                   rounds.push(group + ',' + pilotRoundTime.minutes() + ',' + pilotRoundTime.seconds() + ',' + landing + ',' + over + ',' + penalty);
                 });
 
-                console.log('Rounds', rounds);
+                pilots.push('0,' + pilot.name + ',' + pilot.class + ',' + pilot.freq + ',' + pilot.team + ',' + rounds.join(','));
               });
+
+              var lineThree = pilots.join(',');
+              $log.debug('Line Three:', lineThree);
+
+              download('f3xEntry.txt', lineOne + '\n' + lineTwo + '\n' + lineThree);
             }
         },
           {
@@ -75,6 +111,8 @@ angular.module('app')
             }
       }
     ];
-      }
+      },
+      download: download,
+      downloadJSON: downloadJSON
     }
   }]);

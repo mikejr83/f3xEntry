@@ -20,7 +20,7 @@ angular.module('app')
     $scope.maskUIOptions = {
       maskDefinitions: {
         '9': /\d/,
-        '5': /[1-5]/,
+        '5': /[0-5]/,
         '1': /1/
       }
     };
@@ -77,4 +77,8 @@ angular.module('app')
         contestType[0].export($scope.selectedContest);
       }
     };
+
+    $scope.exportRawContest = function () {
+      contestTypeFactory.downloadJSON('rawOutput.json', JSON.stringify($scope.selectedContest, null, 2));
+    }
   }]);

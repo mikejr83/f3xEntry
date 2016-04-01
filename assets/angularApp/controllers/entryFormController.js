@@ -1,5 +1,5 @@
 angular.module('app')
-  .controller('EntryFormController', ['$scope', '$log', '$localStorage', 'contestTypeFactory', 'PILOT_CLASSES', 'PILOT_FREQ', function ($scope, $log, $localStorage, contestTypeFactory, pilotClasses, pilotFreqs) {
+  .controller('EntryFormController', ['$scope', '$log', '$localStorage', 'contestTypeFactory', 'PILOT_CLASSES', 'PILOT_FREQ', 'F3K_ROUND_TYPES', function ($scope, $log, $localStorage, contestTypeFactory, pilotClasses, pilotFreqs, f3kRoundTypes) {
     var contestTypes = contestTypeFactory.loadContestTypes();
 
     $scope.$storage = $localStorage.$default({
@@ -30,8 +30,10 @@ angular.module('app')
     $scope.contestTypes = contestTypes;
     $scope.pilotClasses = pilotClasses;
     $scope.pilotFreqs = pilotFreqs;
+    $scope.f3kRoundTypes = f3kRoundTypes;
 
     $scope.selectedContest = $scope.$storage.contests[0];
+    $scope.selectedRoundType = $scope.f3kRoundTypes[0];
 
     $scope.hideJumbo = function () {
       $scope.showJumbo = false;

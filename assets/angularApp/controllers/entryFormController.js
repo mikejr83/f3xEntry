@@ -59,16 +59,29 @@ angular.module('app')
       });
     };
 
-    $scope.addRound = function () {
+    $scope.addRound = function (contestType) {
       if (!$scope.selectedContest.rounds) {
         $scope.selectedContest.rounds = [];
       }
 
-      $scope.selectedContest.rounds.push({
+      var round = {
         number: $scope.selectedContest.rounds.length + 1,
-        target: 0,
-        pilots: _.clone($scope.selectedContest.pilots)
-      });
+//        target: 0,
+//        pilots: _.clone($scope.selectedContest.pilots)
+      };
+
+      switch (contestType.key) {
+        case 'f3j':
+          round.target = 0;
+
+          break;
+
+        case 'f3k':
+          round.type = $scope.f3kRoundTypes[0];
+          break;
+      }
+
+      $scope.selectedContest.rounds.push(round);
     };
 
     $scope.exportContest = function () {

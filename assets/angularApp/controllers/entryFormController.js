@@ -1,6 +1,10 @@
 angular.module('app')
-  .controller('EntryFormController', ['$scope', '$log', '$localStorage', 'contestTypeFactory', 'PILOT_CLASSES', 'PILOT_FREQ', 'F3K_ROUND_TYPES', function ($scope, $log, $localStorage, contestTypeFactory, pilotClasses, pilotFreqs, f3kRoundTypes) {
+  .controller('EntryFormController', ['$scope', '$log', '$templateCache', '$localStorage', 'contestTypeFactory', 'PILOT_CLASSES', 'PILOT_FREQ', 'F3K_ROUND_TYPES', function ($scope, $log, $templateCache, $localStorage, contestTypeFactory, pilotClasses, pilotFreqs, f3kRoundTypes) {
     var contestTypes = contestTypeFactory.loadContestTypes();
+
+    console.log('angularApp/templates/f3kscores.html', $templateCache.get('angularApp/templates/f3kscores.html'));
+
+    console.log('$templateCache', $templateCache)
 
     $scope.$storage = $localStorage.$default({
       contests: [

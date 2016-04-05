@@ -9,11 +9,14 @@
 module.exports = function (grunt) {
 
   grunt.config.set('ngtemplates', {
-    MGMTApp: {
+    app: {
       src: 'assets/angularApp/**/*.html',
       dest: '.tmp/public/js/templateCache.js',
       options: {
-        htmlmin:  { collapseWhitespace: true, collapseBooleanAttributes: true }
+        htmlmin:  { collapseWhitespace: true, collapseBooleanAttributes: true },
+        url: function (url) {
+          return url.replace('assets/', '');
+        }
       }
     }
   });

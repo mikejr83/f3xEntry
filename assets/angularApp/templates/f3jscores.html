@@ -1,0 +1,38 @@
+<ul class="nav nav-pills">
+  <li role="presentation" ng-click="addRound()"><a href=""><span class="glyphicon glyphicon-plus"></span>Add Round</a></li>
+</ul>
+<div class="round" ng-repeat="round in selectedContest.rounds">
+  <h3>Round <span ng-bind="::round.number"></span></h3>
+  <div class="form-inline">
+    <label>Target Time</label>
+    <input class="form-control time-control" type="text" ng-model="round.targetTime" ui-options="maskUIOptions" ui-mask="?99:?5?9" ui-mask-placeholder model-view-value="true" ui-mask-placeholder-char="0"></input>
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Pilot</th>
+        <th>Group</th>
+        <th>Time</th>
+        <th>Landing</th>
+        <th>Penalty</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="pilot in selectedContest.pilots">
+        <td ng-bind="pilot.name"></td>
+        <td>
+          <input class="form-control time-control" type="text" ng-model="pilot.rounds[round.number - 1].group"></input>
+        </td>
+        <td>
+          <input class="form-control time-control" type="text" ng-model="pilot.rounds[round.number - 1].time" ui-options="maskUIOptions" ui-mask="?9?9:?5?9.?9?9" ui-mask-placeholder ui-mask-placeholder-char="0" model-view-value="true"></input>
+        </td>
+        <td>
+          <input class="form-control time-control" type="text" ng-model="pilot.rounds[round.number - 1].landing" ui-options="maskUIOptions" ui-mask="?9?9?9" ui-mask-placeholder ui-mask-placeholder-char="space" model-view-value="true"></input>
+        </td>
+        <td>
+          <input class="form-control time-control" type="text" ng-model="pilot.rounds[round.number - 1].penalty"></input>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

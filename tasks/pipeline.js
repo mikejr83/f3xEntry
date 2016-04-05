@@ -37,6 +37,8 @@ var jsFilesToInject = [
 
   'angularApp/app.js',
 
+  'js/templateCache.js',
+
   'angularApp/**/*.js',
 
   // All of the rest of your client-side js files

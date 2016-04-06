@@ -112,21 +112,36 @@
 
     </div>
 
-    <div class="row" ng-if="selectedContest.contestType.key == 'f3j'" ng-cloak>
-      <h2>F3J or Thermal Duration</h2>
-      <div ng-include="'angularApp/templates/f3jscores.html'">
-      </div>
+    <div class="row">
+      <h2 ng-if="selectedContest.contestType.key == 'f3j'">F3J or Thermal Duration</h2>
+      <h2 ng-if="selectedContest.contestType.key == 'f3k'">F3K</h2>
+      <h2 ng-if="selectedContest.contestType.key == 'f3b'">F3B</h2>
     </div>
 
-    <div class="row" ng-if="selectedContest.contestType.key == 'f3k'" ng-cloak>
-      <h2>F3K</h2>
-      <div ng-include="'angularApp/templates/f3kscores.html'">
-      </div>
+    <div class="row">
+      <ul class="nav nav-pills">
+        <li ng-if="selectedContest.contestType.key != 'f3k'" role="presentation" ng-click="addRound()"><a href=""><span class="glyphicon glyphicon-plus"></span>Add Round</a></li>
+        <li ng-if="selectedContest.contestType.key == 'f3k'" role="presentation" ng-click="addRound(selectedContest.contestType, selectedRoundType)"><a href=""><span class="glyphicon glyphicon-plus"></span>Add Round</a></li>
+      </ul>
     </div>
 
-    <div class="row" ng-if="selectedContest.contestType.key == 'f3b'" ng-cloak>
-      <h2>F3B</h2>
-      <div ng-include="'angularApp/templates/f3bscores.html'">
+    <div class="row vertical-align" ng-cloak>
+
+      <div class="col-md-1">
+        <span class="glyphicon glyphicon-chevron-left" ng-click="previousRound()"></span>
+      </div>
+
+      <div class="col-md-10">
+        <div ng-if="selectedContest.contestType.key == 'f3j'" ng-include="'angularApp/templates/f3jscores.html'">
+        </div>
+        <div ng-if="selectedContest.contestType.key == 'f3k'" ng-include="'angularApp/templates/f3kscores.html'">
+        </div>
+        <div ng-if="selectedContest.contestType.key == 'f3b'" ng-include="'angularApp/templates/f3bscores.html'">
+        </div>
+      </div>
+
+      <div class="col-md-1">
+        <span class="glyphicon glyphicon-chevron-right" ng-click="nextRound()"></span>
       </div>
     </div>
 

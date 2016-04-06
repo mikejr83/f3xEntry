@@ -1,6 +1,7 @@
 angular.module('app')
   .controller('EntryFormController', ['$scope', '$log', '$templateCache', '$localStorage', 'contestTypeFactory', 'PILOT_CLASSES', 'PILOT_FREQ', 'F3K_ROUND_TYPES', function ($scope, $log, $templateCache, $localStorage, contestTypeFactory, pilotClasses, pilotFreqs, f3kRoundTypes) {
-    var contestTypes = contestTypeFactory.loadContestTypes();
+    var contestTypes = contestTypeFactory.loadContestTypes(),
+      roundIndex = 0;
 
     console.log('angularApp/templates/f3kscores.html', $templateCache.get('angularApp/templates/f3kscores.html'));
 
@@ -38,6 +39,7 @@ angular.module('app')
 
     $scope.selectedContest = $scope.$storage.contests[0];
     $scope.selectedRoundType = $scope.f3kRoundTypes[0];
+    $scope.selectedRound = $scope.selectedContest.rounds[roundIndex];
 
     $scope.hideJumbo = function () {
       $scope.showJumbo = false;
@@ -70,19 +72,19 @@ angular.module('app')
 
       var round = {
         number: $scope.selectedContest.rounds.length + 1,
-//        target: 0,
-//        pilots: _.clone($scope.selectedContest.pilots)
+        //        target: 0,
+        //        pilots: _.clone($scope.selectedContest.pilots)
       };
 
       switch (contestType.key) {
-        case 'f3j':
-          round.target = 0;
+      case 'f3j':
+        round.target = 0;
 
-          break;
+        break;
 
-        case 'f3k':
-          round.type = $scope.f3kRoundTypes[0];
-          break;
+      case 'f3k':
+        round.type = $scope.f3kRoundTypes[0];
+        break;
       }
 
       $scope.selectedContest.rounds.push(round);
@@ -90,7 +92,9 @@ angular.module('app')
 
     $scope.exportContest = function () {
       $log.debug('Exporting contest', $scope.selectedContest);
-      var contestType = _.where(contestTypes, {key: $scope.selectedContest.contestType.key});
+      var contestType = _.where(contestTypes, {
+        key: $scope.selectedContest.contestType.key
+      });
 
       if (contestType && contestType.length == 1) {
         contestType[0].export($scope.selectedContest);
@@ -99,5 +103,19 @@ angular.module('app')
 
     $scope.exportRawContest = function () {
       contestTypeFactory.downloadJSON('rawOutput.json', JSON.stringify($scope.selectedContest, null, 2));
+    };
+
+    $scope.nextRound = function () {
+      if (roundIndex < $scope.selectedContest.rounds.length - 1) {
+        roundIndex++;
+      }
+      $scope.selectedRound = $scope.selectedContest.rounds[roundIndex];
+    };
+
+    $scope.previousRound = function () {
+      if (roundIndex > 0) {
+        roundIndex--;
+      }
+      $scope.selectedRound = $scope.selectedContest.rounds[roundIndex];
     }
   }]);

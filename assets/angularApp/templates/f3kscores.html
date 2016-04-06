@@ -1,155 +1,149 @@
-<ul class="nav nav-pills">
-  <li role="presentation" ng-click="addRound(selectedContest.contestType, selectedRoundType)"><a href=""><span class="glyphicon glyphicon-plus"></span>Add Round</a></li>
-</ul>
+<h3>Round <span ng-bind="selectedRound.number"></span></h3>
 
-<div class="round" ng-repeat="round in selectedContest.rounds">
-  <h3>Round <span ng-bind="::round.number"></span></h3>
+<div class="form-group">
+  <label class="control-label">Round Type</label>
+  <br />
+  <button type="button" class="btn btn-default" placeholder="Type" ng-model="selectedRound.type" bs-options="roundType as roundType.name + ' (' + roundType.description + ')' for roundType in f3kRoundTypes" bs-select>
+    Action <span class="caret"></span>
+  </button>
+</div>
 
-  <div class="form-group">
-    <label class="control-label">Round Type</label>
-    <br />
-    <button type="button" class="btn btn-default" placeholder="Type" ng-model="round.type" bs-options="roundType as roundType.name + ' (' + roundType.description + ')' for roundType in f3kRoundTypes" bs-select>
-      Action <span class="caret"></span>
-    </button>
-  </div>
+<div ng-repeat="pilot in selectedContest.pilots">
+  <h4>Pilot: <span ng-bind="pilot.name"></span></h4>
 
-  <div ng-repeat="pilot in selectedContest.pilots">
-    <h4>Pilot: <span ng-bind="pilot.name"></span></h4>
-
-    <div ng-switch="round.type.name">
-      <div class="form-inline" ng-switch-when="A">
-        <div class="form-group">
-          <label class="control-label">Last Flight</label>
-          <input class="form-control time-control small" type="text" ng-model="pilot.rounds[round.number - 1].time[0]" ui-options="maskUIOptions" ui-mask="?9:?5?9" ui-mask-placeholder ui-mask-placeholder-char="0" model-view-value="true"></input>
-        </div>
+  <div ng-switch="selectedRound.type.name">
+    <div class="form-inline" ng-switch-when="A">
+      <div class="form-group">
+        <label class="control-label">Last Flight</label>
+        <input class="form-control time-control small" type="text" ng-model="pilot.rounds[selectedRound.number - 1].time[0]" ui-options="maskUIOptions" ui-mask="?9:?5?9" ui-mask-placeholder ui-mask-placeholder-char="0" model-view-value="true"></input>
       </div>
-      <div class="form-inline" ng-switch-when="B">
-        <div class="inline form-group">
-          <label class="control-label">Next to Last Flight</label>
-          <input class="form-control time-control small" type="text" ng-model="pilot.rounds[round.number - 1].time[0]" ui-options="maskUIOptions" ui-mask="?9:?5?9" ui-mask-placeholder ui-mask-placeholder-char="0" model-view-value="true"></input>
-        </div>
-        <div class="inline form-group">
-          <label class="control-label">Last Flight</label>
-          <input class="form-control time-control small" type="text" ng-model="pilot.rounds[round.number - 1].time[1]" ui-options="maskUIOptions" ui-mask="?9:?5?9" ui-mask-placeholder ui-mask-placeholder-char="0" model-view-value="true"></input>
-        </div>
+    </div>
+    <div class="form-inline" ng-switch-when="B">
+      <div class="inline form-group">
+        <label class="control-label">Next to Last Flight</label>
+        <input class="form-control time-control small" type="text" ng-model="pilot.rounds[selectedRound.number - 1].time[0]" ui-options="maskUIOptions" ui-mask="?9:?5?9" ui-mask-placeholder ui-mask-placeholder-char="0" model-view-value="true"></input>
       </div>
-      <div ng-switch-when="C">
-        TASK C
+      <div class="inline form-group">
+        <label class="control-label">Last Flight</label>
+        <input class="form-control time-control small" type="text" ng-model="pilot.rounds[selectedRound.number - 1].time[1]" ui-options="maskUIOptions" ui-mask="?9:?5?9" ui-mask-placeholder ui-mask-placeholder-char="0" model-view-value="true"></input>
       </div>
-      <div class="form-inline" ng-switch-when="D">
-        <div class="inline form-group">
-          <label class="control-label">30sec Flight</label>
-          <input class="form-control time-control small" type="text" ng-model="pilot.rounds[round.number - 1].time" ui-options="maskUIOptions" ui-mask="0:?5?9" ui-mask-placeholder ui-mask-placeholder-char="0" model-view-value="true"></input>
-        </div>
-        <div class="inline form-group">
-          <label class="control-label">45sec Flight</label>
-          <input class="form-control time-control small" type="text" ng-model="pilot.rounds[round.number - 1].time" ui-options="maskUIOptions" ui-mask="0:?5?9" ui-mask-placeholder ui-mask-placeholder-char="0" model-view-value="true"></input>
-        </div>
-        <div class="inline form-group">
-          <label class="control-label">1min Flight</label>
-          <input class="form-control time-control small" type="text" ng-model="pilot.rounds[round.number - 1].time" ui-options="maskUIOptions" ui-mask="?9:?5?9" ui-mask-placeholder ui-mask-placeholder-char="0" model-view-value="true"></input>
-        </div>
-        <div class="inline form-group">
-          <label class="control-label">1:15 Flight</label>
-          <input class="form-control time-control small" type="text" ng-model="pilot.rounds[round.number - 1].time" ui-options="maskUIOptions" ui-mask="?9:?5?9" ui-mask-placeholder ui-mask-placeholder-char="0" model-view-value="true"></input>
-        </div>
-        <div class="inline form-group">
-          <label class="control-label">1:30 Flight</label>
-          <input class="form-control time-control small" type="text" ng-model="pilot.rounds[round.number - 1].time" ui-options="maskUIOptions" ui-mask="?9:?5?9" ui-mask-placeholder ui-mask-placeholder-char="0" model-view-value="true"></input>
-        </div>
-        <div class="inline form-group">
-          <label class="control-label">1:45 Flight</label>
-          <input class="form-control time-control small" type="text" ng-model="pilot.rounds[round.number - 1].time" ui-options="maskUIOptions" ui-mask="?9:?5?9" ui-mask-placeholder ui-mask-placeholder-char="0" model-view-value="true"></input>
-        </div>
-        <div class="inline form-group">
-          <label class="control-label">2:00 Flight</label>
-          <input class="form-control time-control small" type="text" ng-model="pilot.rounds[round.number - 1].time" ui-options="maskUIOptions" ui-mask="?9:?5?9" ui-mask-placeholder ui-mask-placeholder-char="0" model-view-value="true"></input>
-        </div>
+    </div>
+    <div ng-switch-when="C">
+      TASK C
+    </div>
+    <div class="form-inline" ng-switch-when="D">
+      <div class="inline form-group">
+        <label class="control-label">30sec Flight</label>
+        <input class="form-control time-control small" type="text" ng-model="pilot.rounds[selectedRound.number - 1].time" ui-options="maskUIOptions" ui-mask="0:?5?9" ui-mask-placeholder ui-mask-placeholder-char="0" model-view-value="true"></input>
       </div>
-      <div ng-switch-when="E">
-        TASK E - Poker
+      <div class="inline form-group">
+        <label class="control-label">45sec Flight</label>
+        <input class="form-control time-control small" type="text" ng-model="pilot.rounds[selectedRound.number - 1].time" ui-options="maskUIOptions" ui-mask="0:?5?9" ui-mask-placeholder ui-mask-placeholder-char="0" model-view-value="true"></input>
       </div>
-      <div class="form-inline" ng-switch-when="F">
-        <div class="inline form-group">
-          <label class="control-label">Flight One</label>
-          <input class="form-control time-control small" type="text" ng-model="pilot.rounds[round.number - 1].time[0]" ui-options="maskUIOptions" ui-mask="?9:?5?9" ui-mask-placeholder ui-mask-placeholder-char="0" model-view-value="true"></input>
-        </div>
-        <div class="inline form-group">
-          <label class="control-label">Flight Two</label>
-          <input class="form-control time-control small" type="text" ng-model="pilot.rounds[round.number - 1].time[1]" ui-options="maskUIOptions" ui-mask="?9:?5?9" ui-mask-placeholder ui-mask-placeholder-char="0" model-view-value="true"></input>
-        </div>
-        <div class="inline form-group">
-          <label class="control-label">Flight Three</label>
-          <input class="form-control time-control small" type="text" ng-model="pilot.rounds[round.number - 1].time[2]" ui-options="maskUIOptions" ui-mask="?9:?5?9" ui-mask-placeholder ui-mask-placeholder-char="0" model-view-value="true"></input>
-        </div>
+      <div class="inline form-group">
+        <label class="control-label">1min Flight</label>
+        <input class="form-control time-control small" type="text" ng-model="pilot.rounds[selectedRound.number - 1].time" ui-options="maskUIOptions" ui-mask="?9:?5?9" ui-mask-placeholder ui-mask-placeholder-char="0" model-view-value="true"></input>
       </div>
-      <div class="form-inline" ng-switch-when="G">
-        <div class="inline form-group">
-          <label class="control-label">Flight One</label>
-          <input class="form-control time-control small" type="text" ng-model="pilot.rounds[round.number - 1].time[0]" ui-options="maskUIOptions" ui-mask="?9:?5?9" ui-mask-placeholder ui-mask-placeholder-char="0" model-view-value="true"></input>
-        </div>
-        <div class="inline form-group">
-          <label class="control-label">Flight Two</label>
-          <input class="form-control time-control small" type="text" ng-model="pilot.rounds[round.number - 1].time[1]" ui-options="maskUIOptions" ui-mask="?9:?5?9" ui-mask-placeholder ui-mask-placeholder-char="0" model-view-value="true"></input>
-        </div>
-        <div class="inline form-group">
-          <label class="control-label">Flight Three</label>
-          <input class="form-control time-control small" type="text" ng-model="pilot.rounds[round.number - 1].time[2]" ui-options="maskUIOptions" ui-mask="?9:?5?9" ui-mask-placeholder ui-mask-placeholder-char="0" model-view-value="true"></input>
-        </div>
-        <div class="inline form-group">
-          <label class="control-label">Flight Four</label>
-          <input class="form-control time-control small" type="text" ng-model="pilot.rounds[round.number - 1].time[3]" ui-options="maskUIOptions" ui-mask="?9:?5?9" ui-mask-placeholder ui-mask-placeholder-char="0" model-view-value="true"></input>
-        </div>
-        <div class="inline form-group">
-          <label class="control-label">Flight Five</label>
-          <input class="form-control time-control small" type="text" ng-model="pilot.rounds[round.number - 1].time" ui-options="maskUIOptions" ui-mask="?9:?5?9" ui-mask-placeholder ui-mask-placeholder-char="0" model-view-value="true"></input>
-        </div>
+      <div class="inline form-group">
+        <label class="control-label">1:15 Flight</label>
+        <input class="form-control time-control small" type="text" ng-model="pilot.rounds[selectedRound.number - 1].time" ui-options="maskUIOptions" ui-mask="?9:?5?9" ui-mask-placeholder ui-mask-placeholder-char="0" model-view-value="true"></input>
       </div>
-      <div class="form-inline" ng-switch-when="H">
-        <div class="inline form-group">
-          <label class="control-label">1m Flight</label>
-          <input class="form-control time-control small" type="text" ng-model="pilot.rounds[round.number - 1].time[0]" ui-options="maskUIOptions" ui-mask="?9:?5?9" ui-mask-placeholder ui-mask-placeholder-char="0" model-view-value="true"></input>
-        </div>
-        <div class="inline form-group">
-          <label class="control-label">2m Flight</label>
-          <input class="form-control time-control small" type="text" ng-model="pilot.rounds[round.number - 1].time[1]" ui-options="maskUIOptions" ui-mask="?9:?5?9" ui-mask-placeholder ui-mask-placeholder-char="0" model-view-value="true"></input>
-        </div>
-        <div class="inline form-group">
-          <label class="control-label">3m Flight</label>
-          <input class="form-control time-control small" type="text" ng-model="pilot.rounds[round.number - 1].time[2]" ui-options="maskUIOptions" ui-mask="?9:?5?9" ui-mask-placeholder ui-mask-placeholder-char="0" model-view-value="true"></input>
-        </div>
-        <div class="inline form-group">
-          <label class="control-label">4m Flight</label>
-          <input class="form-control time-control small" type="text" ng-model="pilot.rounds[round.number - 1].time[3]" ui-options="maskUIOptions" ui-mask="?9:?5?9" ui-mask-placeholder ui-mask-placeholder-char="0" model-view-value="true"></input>
-        </div>
+      <div class="inline form-group">
+        <label class="control-label">1:30 Flight</label>
+        <input class="form-control time-control small" type="text" ng-model="pilot.rounds[selectedRound.number - 1].time" ui-options="maskUIOptions" ui-mask="?9:?5?9" ui-mask-placeholder ui-mask-placeholder-char="0" model-view-value="true"></input>
       </div>
-      <div class="form-inline" ng-switch-when="I">
-        <div class="inline form-group">
-          <label class="control-label">Flight One</label>
-          <input class="form-control time-control small" type="text" ng-model="pilot.rounds[round.number - 1].time[0]" ui-options="maskUIOptions" ui-mask="?9:?5?9" ui-mask-placeholder ui-mask-placeholder-char="0" model-view-value="true"></input>
-        </div>
-        <div class="inline form-group">
-          <label class="control-label">Flight Two</label>
-          <input class="form-control time-control small" type="text" ng-model="pilot.rounds[round.number - 1].time[1]" ui-options="maskUIOptions" ui-mask="?9:?5?9" ui-mask-placeholder ui-mask-placeholder-char="0" model-view-value="true"></input>
-        </div>
-        <div class="inline form-group">
-          <label class="control-label">Flight Three</label>
-          <input class="form-control time-control small" type="text" ng-model="pilot.rounds[round.number - 1].time[2]" ui-options="maskUIOptions" ui-mask="?9:?5?9" ui-mask-placeholder ui-mask-placeholder-char="0" model-view-value="true"></input>
-        </div>
+      <div class="inline form-group">
+        <label class="control-label">1:45 Flight</label>
+        <input class="form-control time-control small" type="text" ng-model="pilot.rounds[selectedRound.number - 1].time" ui-options="maskUIOptions" ui-mask="?9:?5?9" ui-mask-placeholder ui-mask-placeholder-char="0" model-view-value="true"></input>
       </div>
-      <div class="form-inline" ng-switch-when="J">
-        <div class="inline form-group">
-          <label class="control-label">Flight One</label>
-          <input class="form-control time-control small" type="text" ng-model="pilot.rounds[round.number - 1].time[0]" ui-options="maskUIOptions" ui-mask="?9:?5?9" ui-mask-placeholder ui-mask-placeholder-char="0" model-view-value="true"></input>
-        </div>
-        <div class="inline form-group">
-          <label class="control-label">Flight Two</label>
-          <input class="form-control time-control small" type="text" ng-model="pilot.rounds[round.number - 1].time[1]" ui-options="maskUIOptions" ui-mask="?9:?5?9" ui-mask-placeholder ui-mask-placeholder-char="0" model-view-value="true"></input>
-        </div>
-        <div class="inline form-group">
-          <label class="control-label">Flight Three</label>
-          <input class="form-control time-control small" type="text" ng-model="pilot.rounds[round.number - 1].time[2]" ui-options="maskUIOptions" ui-mask="?9:?5?9" ui-mask-placeholder ui-mask-placeholder-char="0" model-view-value="true"></input>
-        </div>
+      <div class="inline form-group">
+        <label class="control-label">2:00 Flight</label>
+        <input class="form-control time-control small" type="text" ng-model="pilot.rounds[selectedRound.number - 1].time" ui-options="maskUIOptions" ui-mask="?9:?5?9" ui-mask-placeholder ui-mask-placeholder-char="0" model-view-value="true"></input>
+      </div>
+    </div>
+    <div ng-switch-when="E">
+      TASK E - Poker
+    </div>
+    <div class="form-inline" ng-switch-when="F">
+      <div class="inline form-group">
+        <label class="control-label">Flight One</label>
+        <input class="form-control time-control small" type="text" ng-model="pilot.rounds[selectedRound.number - 1].time[0]" ui-options="maskUIOptions" ui-mask="?9:?5?9" ui-mask-placeholder ui-mask-placeholder-char="0" model-view-value="true"></input>
+      </div>
+      <div class="inline form-group">
+        <label class="control-label">Flight Two</label>
+        <input class="form-control time-control small" type="text" ng-model="pilot.rounds[selectedRound.number - 1].time[1]" ui-options="maskUIOptions" ui-mask="?9:?5?9" ui-mask-placeholder ui-mask-placeholder-char="0" model-view-value="true"></input>
+      </div>
+      <div class="inline form-group">
+        <label class="control-label">Flight Three</label>
+        <input class="form-control time-control small" type="text" ng-model="pilot.rounds[selectedRound.number - 1].time[2]" ui-options="maskUIOptions" ui-mask="?9:?5?9" ui-mask-placeholder ui-mask-placeholder-char="0" model-view-value="true"></input>
+      </div>
+    </div>
+    <div class="form-inline" ng-switch-when="G">
+      <div class="inline form-group">
+        <label class="control-label">Flight One</label>
+        <input class="form-control time-control small" type="text" ng-model="pilot.rounds[selectedRound.number - 1].time[0]" ui-options="maskUIOptions" ui-mask="?9:?5?9" ui-mask-placeholder ui-mask-placeholder-char="0" model-view-value="true"></input>
+      </div>
+      <div class="inline form-group">
+        <label class="control-label">Flight Two</label>
+        <input class="form-control time-control small" type="text" ng-model="pilot.rounds[selectedRound.number - 1].time[1]" ui-options="maskUIOptions" ui-mask="?9:?5?9" ui-mask-placeholder ui-mask-placeholder-char="0" model-view-value="true"></input>
+      </div>
+      <div class="inline form-group">
+        <label class="control-label">Flight Three</label>
+        <input class="form-control time-control small" type="text" ng-model="pilot.rounds[selectedRound.number - 1].time[2]" ui-options="maskUIOptions" ui-mask="?9:?5?9" ui-mask-placeholder ui-mask-placeholder-char="0" model-view-value="true"></input>
+      </div>
+      <div class="inline form-group">
+        <label class="control-label">Flight Four</label>
+        <input class="form-control time-control small" type="text" ng-model="pilot.rounds[selectedRound.number - 1].time[3]" ui-options="maskUIOptions" ui-mask="?9:?5?9" ui-mask-placeholder ui-mask-placeholder-char="0" model-view-value="true"></input>
+      </div>
+      <div class="inline form-group">
+        <label class="control-label">Flight Five</label>
+        <input class="form-control time-control small" type="text" ng-model="pilot.rounds[selectedRound.number - 1].time" ui-options="maskUIOptions" ui-mask="?9:?5?9" ui-mask-placeholder ui-mask-placeholder-char="0" model-view-value="true"></input>
+      </div>
+    </div>
+    <div class="form-inline" ng-switch-when="H">
+      <div class="inline form-group">
+        <label class="control-label">1m Flight</label>
+        <input class="form-control time-control small" type="text" ng-model="pilot.rounds[selectedRound.number - 1].time[0]" ui-options="maskUIOptions" ui-mask="?9:?5?9" ui-mask-placeholder ui-mask-placeholder-char="0" model-view-value="true"></input>
+      </div>
+      <div class="inline form-group">
+        <label class="control-label">2m Flight</label>
+        <input class="form-control time-control small" type="text" ng-model="pilot.rounds[selectedRound.number - 1].time[1]" ui-options="maskUIOptions" ui-mask="?9:?5?9" ui-mask-placeholder ui-mask-placeholder-char="0" model-view-value="true"></input>
+      </div>
+      <div class="inline form-group">
+        <label class="control-label">3m Flight</label>
+        <input class="form-control time-control small" type="text" ng-model="pilot.rounds[selectedRound.number - 1].time[2]" ui-options="maskUIOptions" ui-mask="?9:?5?9" ui-mask-placeholder ui-mask-placeholder-char="0" model-view-value="true"></input>
+      </div>
+      <div class="inline form-group">
+        <label class="control-label">4m Flight</label>
+        <input class="form-control time-control small" type="text" ng-model="pilot.rounds[selectedRound.number - 1].time[3]" ui-options="maskUIOptions" ui-mask="?9:?5?9" ui-mask-placeholder ui-mask-placeholder-char="0" model-view-value="true"></input>
+      </div>
+    </div>
+    <div class="form-inline" ng-switch-when="I">
+      <div class="inline form-group">
+        <label class="control-label">Flight One</label>
+        <input class="form-control time-control small" type="text" ng-model="pilot.rounds[selectedRound.number - 1].time[0]" ui-options="maskUIOptions" ui-mask="?9:?5?9" ui-mask-placeholder ui-mask-placeholder-char="0" model-view-value="true"></input>
+      </div>
+      <div class="inline form-group">
+        <label class="control-label">Flight Two</label>
+        <input class="form-control time-control small" type="text" ng-model="pilot.rounds[selectedRound.number - 1].time[1]" ui-options="maskUIOptions" ui-mask="?9:?5?9" ui-mask-placeholder ui-mask-placeholder-char="0" model-view-value="true"></input>
+      </div>
+      <div class="inline form-group">
+        <label class="control-label">Flight Three</label>
+        <input class="form-control time-control small" type="text" ng-model="pilot.rounds[selectedRound.number - 1].time[2]" ui-options="maskUIOptions" ui-mask="?9:?5?9" ui-mask-placeholder ui-mask-placeholder-char="0" model-view-value="true"></input>
+      </div>
+    </div>
+    <div class="form-inline" ng-switch-when="J">
+      <div class="inline form-group">
+        <label class="control-label">Flight One</label>
+        <input class="form-control time-control small" type="text" ng-model="pilot.rounds[selectedRound.number - 1].time[0]" ui-options="maskUIOptions" ui-mask="?9:?5?9" ui-mask-placeholder ui-mask-placeholder-char="0" model-view-value="true"></input>
+      </div>
+      <div class="inline form-group">
+        <label class="control-label">Flight Two</label>
+        <input class="form-control time-control small" type="text" ng-model="pilot.rounds[selectedRound.number - 1].time[1]" ui-options="maskUIOptions" ui-mask="?9:?5?9" ui-mask-placeholder ui-mask-placeholder-char="0" model-view-value="true"></input>
+      </div>
+      <div class="inline form-group">
+        <label class="control-label">Flight Three</label>
+        <input class="form-control time-control small" type="text" ng-model="pilot.rounds[selectedRound.number - 1].time[2]" ui-options="maskUIOptions" ui-mask="?9:?5?9" ui-mask-placeholder ui-mask-placeholder-char="0" model-view-value="true"></input>
       </div>
     </div>
   </div>

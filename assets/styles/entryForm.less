@@ -1,7 +1,6 @@
 .entry-form {
   padding-top: 6rem;
   margin-bottom: 6rem;
-
   table.table {
     .time-control {
       width: 8rem;
@@ -17,18 +16,33 @@
       }
     }
   }
-
   .form-inline {
     .time-control {
       &.small {
-      width: 6rem;
+        width: 6rem;
       }
-
     }
-
     div.inline.form-group {
       margin-right: 1rem;
+      label.control-label {
+        margin-right: 0.5rem;
+      }
     }
+  }
+  .vertical-align {
+    display: flex;
+    align-items: center;
+  }
+  .glyphicon-chevron-left,
+  .glyphicon-chevron-right {
+    font-size: 3rem;
+    cursor: pointer;
+    &:hover {
+      color: #286090;
+    }
+  }
+  .glyphicon-chevron-right {
+    text-align: right;
   }
 }
 

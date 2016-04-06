@@ -117,15 +117,15 @@
       <h2 ng-if="selectedContest.contestType.key == 'f3k'">F3K</h2>
       <h2 ng-if="selectedContest.contestType.key == 'f3b'">F3B</h2>
     </div>
-
-    <div class="row">
+    <div class="row" ng-if="selectedContest.contestType != null">
       <ul class="nav nav-pills">
-        <li ng-if="selectedContest.contestType.key != 'f3k'" role="presentation" ng-click="addRound()"><a href=""><span class="glyphicon glyphicon-plus"></span>Add Round</a></li>
+        <li ng-if="selectedContest.contestType.key != 'f3k'" role="presentation" ng-click="addRound(selectedContest.contestType)"><a href=""><span class="glyphicon glyphicon-plus"></span>Add Round</a></li>
         <li ng-if="selectedContest.contestType.key == 'f3k'" role="presentation" ng-click="addRound(selectedContest.contestType, selectedRoundType)"><a href=""><span class="glyphicon glyphicon-plus"></span>Add Round</a></li>
+        <li role="presentation" ng-click="removeRound()"><a href=""><span class="glyphicon glyphicon-minus"></span>Remove Round</a></li>
       </ul>
     </div>
 
-    <div class="row vertical-align" ng-cloak>
+    <div ng-if="selectedContest.rounds && selectedContest.rounds.length > 0" class="row vertical-align" ng-cloak>
 
       <div class="col-md-1">
         <span class="glyphicon glyphicon-chevron-left" ng-click="previousRound()"></span>

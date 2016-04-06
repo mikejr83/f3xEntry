@@ -13,7 +13,7 @@ angular.module('app')
           name: null,
           startDate: new Date(),
           endDate: new Date(),
-          contestType: contestTypes,
+          contestType: contestTypes[0],
           pilots: [],
           rounds: []
         }
@@ -88,6 +88,14 @@ angular.module('app')
       }
 
       $scope.selectedContest.rounds.push(round);
+
+      if ($scope.selectedContest.rounds.length == 1) {
+        $scope.selectedRound = $scope.selectedContest.rounds[0]
+      }
+    };
+
+    $scope.removeRound = function () {
+
     };
 
     $scope.exportContest = function () {
